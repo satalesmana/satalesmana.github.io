@@ -56,16 +56,7 @@ eas build:configure
 ## Run a build
 
 ```bash
-eas build --platform android
-
-Loaded "env" configuration for the "production" profile: no environment variables specified. Learn more: https://docs.expo.dev/build-reference/variables/
-✔ Using remote Android credentials (Expo server)
-✔ Using Keystore from configuration: Build Credentials 7z77DlEXvd (default)
-
-Compressing project files and uploading to EAS Build. Learn more: https://expo.fyi/eas-build-archive
-✔ Uploaded to EAS 1s
-
-Build details: https://expo.dev/accounts/(your build information url...)
+eas build -p android --profile preview
 
 Waiting for build to complete. You can press Ctrl+C to exit.
 ⠴ Build in progress...
