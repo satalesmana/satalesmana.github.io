@@ -6,7 +6,6 @@ sidebar_position: 32
 
 This guide explains how to execute PHP scripts both through a web browser using a local server and directly from the command line interface (CLI).
 
----
 
 ## Method 1: Using XAMPP (or any Local Server)
 
@@ -59,14 +58,13 @@ php test.php
 
 This will execute the script and display the output in the terminal.
 
----
 
 ## Notes
 
 - The command line method is useful for automation, scripting, and quick testing.
 - The browser method is ideal for web development and seeing how PHP interacts with HTML and servers.
 
----
+
 
 > **Tip:** If `php` is not recognized in your terminal, make sure PHP is added to your system’s environment variables.
 
