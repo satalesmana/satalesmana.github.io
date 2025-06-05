@@ -71,7 +71,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Lesmana iD',
+        // title: 'Lesmana iD',
         logo: {
           alt: 'Lesmana',
           src: 'img/logo.png',
