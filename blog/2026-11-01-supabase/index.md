@@ -2,7 +2,7 @@
 slug: supabase
 title: Supabase
 authors: satalesmana
-# tags: [facebook, hello, docusaurus]
+# tags: [Supabase]
 ---
 
 ## Introduction to Supabase
@@ -236,4 +236,92 @@ export default function App() {
     </View>
   )
 }
+```
+
+## Set up a Supabase project
+Create a new project in the Supabase Dashboard.
+After your project is ready, create a table in your Supabase database. You can do this with either the Table Editor or the SQL Editor.
+
+```bash
+# Create a "dompet" table to store
+
+create table dompet (
+  id serial primary key,
+  userId text not null,
+  name text not null,
+  balance integer not null default 0,
+  cardBackground text not null,
+  cardColor text not null,
+  updated_at timestamptz default now()
+  created_at timestamptz default now()
+);
+```
+
+## Enable Data API access to Anon Role (optional) and Configure RLS
+
+Expose the leaderboard table through the Data API so it can be queried over HTTP. A dompet is meant to be public, so anonymous clients only need read access.
+
+```bash
+## this part is optional
+grant select on public.dompet to anon;
+
+## Turn on RLS
+alter table "dompet"
+enable row level security;
+
+## Anyone can read the dompet
+create policy "dompet is public"
+  on dompet
+  for select
+  to anon, authenticated
+  using (true);
+
+## Authenticated users can submit and update scores
+create policy "Authenticated users can submit scores"
+  on dompet
+  for insert
+  to authenticated
+  with check (true);
+
+create policy "Authenticated users can update scores"
+  on dompet
+  for update
+  to authenticated
+  using (true)
+  with check (true);
+
+```
+
+## Client libraries
+
+### 1. get data 
+```js
+    const { data, error } = await supabase
+    .from('dompet')
+    .select()
+    .order('balance', { ascending: false })
+```
+
+### 2. insert data 
+```js
+    const { data, error } = await supabase
+      .from('dompet')
+      .insert([{ userId: 'xxxxxx', name:'Dompet Utama' balance: 18000 }])
+      .select()
+```
+
+### 3. update data 
+```js
+    const { data, error } = await supabase
+      .from('products')
+      .update({ balance: 20000 })
+      .eq('id', 1)
+```
+
+### 4. delete data 
+```js
+    const { data, error } = await supabase
+      .from('dompet')
+      .delete()
+      .eq('id', 1)
 ```
